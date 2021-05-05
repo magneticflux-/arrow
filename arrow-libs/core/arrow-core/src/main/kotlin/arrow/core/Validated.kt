@@ -528,10 +528,6 @@ sealed class Validated<out E, out A> {
       crossinline fr: (B) -> D
     ): (Validated<A, B>) -> Validated<C, D> =
       { fa -> fa.bimap(fl, fr) }
-
-    @PublishedApi
-    internal val unit: Validated<Nothing, Unit> =
-      Validated.Valid(Unit)
   }
 
   /**
@@ -569,6 +565,7 @@ sealed class Validated<out E, out A> {
   ): B =
     fold({ fe(c, it) }, { fa(c, it) })
 
+  @Deprecated(FoldRightDeprecation)
   inline fun <B> bifoldRight(
     c: Eval<B>,
     fe: (E, Eval<B>) -> Eval<B>,
@@ -599,6 +596,12 @@ sealed class Validated<out E, out A> {
 
   data class Valid<out A>(val value: A) : Validated<Nothing, A>() {
     override fun toString(): String = "Validated.Valid($value)"
+
+    companion object {
+      @PublishedApi
+      internal val unit: Validated<Nothing, Unit> =
+        Validated.Valid(Unit)
+    }
   }
 
   data class Invalid<out E>(val value: E) : Validated<E, Nothing>() {
@@ -693,6 +696,7 @@ sealed class Validated<out E, out A> {
   inline fun <B> foldLeft(b: B, f: (B, A) -> B): B =
     fold({ b }, { f(b, it) })
 
+  @Deprecated(FoldRightDeprecation)
   fun <B> foldRight(lb: Eval<B>, f: (A, Eval<B>) -> Eval<B>): Eval<B> =
     when (this) {
       is Valid -> Eval.defer { f(this.value, lb) }
@@ -714,14 +718,14 @@ inline fun <E, A, B, Z> Validated<E, A>.zip(
   zip(
     SE,
     b,
-    Validated.unit,
-    Validated.unit,
-    Validated.unit,
-    Validated.unit,
-    Validated.unit,
-    Validated.unit,
-    Validated.unit,
-    Validated.unit
+    Valid.unit,
+    Valid.unit,
+    Valid.unit,
+    Valid.unit,
+    Valid.unit,
+    Valid.unit,
+    Valid.unit,
+    Valid.unit
   ) { a, b, _, _, _, _, _, _, _, _ ->
     f(a, b)
   }
@@ -736,13 +740,13 @@ inline fun <E, A, B, C, Z> Validated<E, A>.zip(
     SE,
     b,
     c,
-    Validated.unit,
-    Validated.unit,
-    Validated.unit,
-    Validated.unit,
-    Validated.unit,
-    Validated.unit,
-    Validated.unit
+    Valid.unit,
+    Valid.unit,
+    Valid.unit,
+    Valid.unit,
+    Valid.unit,
+    Valid.unit,
+    Valid.unit
   ) { a, b, c, _, _, _, _, _, _, _ ->
     f(a, b, c)
   }
@@ -759,12 +763,12 @@ inline fun <E, A, B, C, D, Z> Validated<E, A>.zip(
     b,
     c,
     d,
-    Validated.unit,
-    Validated.unit,
-    Validated.unit,
-    Validated.unit,
-    Validated.unit,
-    Validated.unit
+    Valid.unit,
+    Valid.unit,
+    Valid.unit,
+    Valid.unit,
+    Valid.unit,
+    Valid.unit
   ) { a, b, c, d, _, _, _, _, _, _ ->
     f(a, b, c, d)
   }
@@ -783,11 +787,11 @@ inline fun <E, A, B, C, D, EE, Z> Validated<E, A>.zip(
     c,
     d,
     e,
-    Validated.unit,
-    Validated.unit,
-    Validated.unit,
-    Validated.unit,
-    Validated.unit
+    Valid.unit,
+    Valid.unit,
+    Valid.unit,
+    Valid.unit,
+    Valid.unit
   ) { a, b, c, d, e, _, _, _, _, _ ->
     f(a, b, c, d, e)
   }
@@ -808,10 +812,10 @@ inline fun <E, A, B, C, D, EE, FF, Z> Validated<E, A>.zip(
     d,
     e,
     ff,
-    Validated.unit,
-    Validated.unit,
-    Validated.unit,
-    Validated.unit
+    Valid.unit,
+    Valid.unit,
+    Valid.unit,
+    Valid.unit
   ) { a, b, c, d, e, ff, _, _, _, _ ->
     f(a, b, c, d, e, ff)
   }
@@ -826,7 +830,7 @@ inline fun <E, A, B, C, D, EE, F, G, Z> Validated<E, A>.zip(
   g: Validated<E, G>,
   f: (A, B, C, D, EE, F, G) -> Z
 ): Validated<E, Z> =
-  zip(SE, b, c, d, e, ff, g, Validated.unit, Validated.unit, Validated.unit) { a, b, c, d, e, ff, g, _, _, _ ->
+  zip(SE, b, c, d, e, ff, g, Valid.unit, Valid.unit, Valid.unit) { a, b, c, d, e, ff, g, _, _, _ ->
     f(a, b, c, d, e, ff, g)
   }
 
@@ -841,7 +845,7 @@ inline fun <E, A, B, C, D, EE, F, G, H, Z> Validated<E, A>.zip(
   h: Validated<E, H>,
   f: (A, B, C, D, EE, F, G, H) -> Z
 ): Validated<E, Z> =
-  zip(SE, b, c, d, e, ff, g, h, Validated.unit, Validated.unit) { a, b, c, d, e, ff, g, h, _, _ ->
+  zip(SE, b, c, d, e, ff, g, h, Valid.unit, Valid.unit) { a, b, c, d, e, ff, g, h, _, _ ->
     f(a, b, c, d, e, ff, g, h)
   }
 
@@ -857,7 +861,7 @@ inline fun <E, A, B, C, D, EE, F, G, H, I, Z> Validated<E, A>.zip(
   i: Validated<E, I>,
   f: (A, B, C, D, EE, F, G, H, I) -> Z
 ): Validated<E, Z> =
-  zip(SE, b, c, d, e, ff, g, h, i, Validated.unit) { a, b, c, d, e, ff, g, h, i, _ ->
+  zip(SE, b, c, d, e, ff, g, h, i, Valid.unit) { a, b, c, d, e, ff, g, h, i, _ ->
     f(a, b, c, d, e, ff, g, h, i)
   }
 

@@ -5,8 +5,8 @@ permalink: /core/
 ---
 
 [![Maven Central](https://img.shields.io/maven-central/v/io.arrow-kt/arrow-core?color=4caf50&label=latest%20release)](https://maven-badges.herokuapp.com/maven-central/io.arrow-kt/arrow-core)
-[![Latest snapshot](https://img.shields.io/maven-metadata/v?color=important&label=latest%20snapshot&metadataUrl=https%3A%2F%2Foss.jfrog.org%2Fartifactory%2Foss-snapshot-local%2Fio%2Farrow-kt%2Farrow-core%2Fmaven-metadata.xml)](https://oss.jfrog.org/artifactory/oss-snapshot-local/io/arrow-kt/arrow-core/)
-[![Kotlin version badge](https://img.shields.io/badge/Kotlin-1.4-blue)](https://kotlinlang.org/docs/reference/whatsnew14.html)
+[![Latest snapshot](https://img.shields.io/badge/dynamic/xml?color=orange&label=latest%20snapshot&prefix=v&query=%2F%2Fmetadata%2Fversioning%2Flatest&url=https%3A%2F%2Foss.sonatype.org%2Fservice%2Flocal%2Frepositories%2Fsnapshots%2Fcontent%2Fio%2Farrow-kt%2Farrow-core%2Fmaven-metadata.xml)](https://oss.sonatype.org/service/local/repositories/snapshots/content/io/arrow-kt/)
+[![Kotlin version](https://img.shields.io/badge/Kotlin-1.4-blue)](https://kotlinlang.org/docs/reference/whatsnew14.html)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 [![StackOverflow](https://img.shields.io/badge/arrow--kt-grey.svg?logo=stackoverflow)](https://stackoverflow.com/questions/tagged/arrow-kt)
 [![Twitter](https://img.shields.io/twitter/follow/arrow_kt?color=blue&style=flat)](https://twitter.com/arrow_kt)
@@ -76,7 +76,7 @@ Add the dependencies into the project's `build.gradle`:
 ##### Arrow Core
 
 ```groovy
-def arrow_version = "0.13.1"
+def arrow_version = "0.13.2"
 dependencies {
     implementation "io.arrow-kt:arrow-core:$arrow_version"
 }
@@ -87,7 +87,7 @@ dependencies {
 ```groovy
 apply plugin: 'kotlin-kapt'
 
-def arrow_version = "0.13.1"
+def arrow_version = "0.13.2"
 dependencies {
     implementation "io.arrow-kt:arrow-optics:$arrow_version"
     kapt    "io.arrow-kt:arrow-meta:$arrow_version"
@@ -97,7 +97,7 @@ dependencies {
 ##### Arrow Core + Arrow Fx
 
 ```groovy
-def arrow_version = "0.13.1"
+def arrow_version = "0.13.2"
 dependencies {
     implementation "io.arrow-kt:arrow-fx-coroutines:$arrow_version"
 }
@@ -125,7 +125,7 @@ Add to your pom.xml file the following properties:
 ```
 <properties>
     <kotlin.version>1.4.0</kotlin.version>
-    <arrow.version>0.13.1</arrow.version>
+    <arrow.version>0.13.2</arrow.version>
 </properties>
 ```
 
@@ -211,13 +211,13 @@ To avoid specifying the Arrow version for every dependency, a BOM file is availa
 
 ## Next development version
 
-If you want to try the latest features, replace `0.13.1` with `1.0.0-SNAPSHOT` and add this repository:
+If you want to try the latest features, replace `0.13.2` with `1.0.0-SNAPSHOT` and add this repository:
 
 ```groovy
 allprojects {
     repositories {
         ...
-        maven { url "https://oss.jfrog.org/artifactory/oss-snapshot-local/" }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
 }
 ```

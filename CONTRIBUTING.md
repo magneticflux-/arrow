@@ -127,7 +127,7 @@ If you want to propose a fix, rename, move, etc. please, ensure that these check
 Please, ensure these points when adding a new feature:
 
 * Include documentation via [Dokka](https://kotlinlang.org/docs/reference/kotlin-doc.html). Please, find examples in the existing code to follow the same pattern.
-* [Use Ank to validate for code snippets](https://github.com/arrow-kt/arrow/blob/master/arrow-libs/ank/README.md)
+* [Use Ank to validate for code snippets](https://github.com/arrow-kt/arrow/blob/main/arrow-libs/ank/README.md)
 * Include tests that cover the proper cases
 
 When creating the pull request, ensure that these checks pass:
@@ -145,7 +145,7 @@ Both successful or failed build checks allow to download the tests report to rev
 
 #### What happens when merging a pull request
 
-When merging the pull request, a new SNAPSHOT library will be published into [OSS repository](https://oss.jfrog.org/artifactory/oss-snapshot-local/io/arrow-kt/).
+When merging the pull request, a new SNAPSHOT library will be published into [Sonatype OSSRH](https://oss.sonatype.org/service/local/repositories/snapshots/content/io/arrow-kt/).
 
 On the other hand, the documentation for the next version (SNAPSHOT) will be updated:
 
